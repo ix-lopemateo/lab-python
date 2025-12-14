@@ -1,0 +1,93 @@
+Ejecutando en nodo: nikola
+Fecha y hora: dom dic 14 12:52:26 CET 2025
+
+Número de elementos: 100000000
+
+Time taken by reduction operation: 0.034558773040771484 seconds
+33.7 ms ± 7.53 μs per loop (mean ± std. dev. of 2 runs, 10 loops each)
+
+ 	 Computing the sum of numbers in the range [0, value): 499999500000
+
+Lista creada con 1000000 elementos
+
+--- Suma usando bucle for ---
+Tiempo con bucle for: 0.0727 segundos
+Resultado: 499999500000
+
+--- Suma usando función sum() ---
+Tiempo con función sum(): 0.0060 segundos
+Resultado: 499999500000
+
+--- Comparación con %timeit ---
+Bucle for:
+42 ms ± 357 μs per loop (mean ± std. dev. of 2 runs, 1 loop each)
+
+Función sum():
+6.24 ms ± 110 μs per loop (mean ± std. dev. of 2 runs, 1 loop each)
+--- Usando NumPy ---
+Array numpy creado con 1000000 elementos
+
+--- Suma con bucle for (array numpy) ---
+Tiempo con bucle for: 0.1256 segundos
+Resultado: 499999500000
+
+--- Suma con numpy.sum() ---
+Tiempo con numpy.sum(): 0.0005 segundos
+Resultado: 499999500000
+
+--- Comparación con %timeit ---
+Bucle for en array numpy:
+72.2 ms ± 161 μs per loop (mean ± std. dev. of 2 runs, 1 loop each)
+
+numpy.sum():
+445 μs ± 15.5 μs per loop (mean ± std. dev. of 2 runs, 1 loop each)
+=== OPTIMIZACIÓN CON NUMBA ===
+
+1. Función original con @njit:
+The slowest run took 1002223.35 times longer than the fastest. This could mean that an intermediate result is being cached.
+2.08 s ± 2.08 s per loop (mean ± std. dev. of 2 runs, 1 loop each)
+Resultado: 499999500000
+
+2. Suma de array numpy con @njit (primera ejecución - incluye compilación):
+Tiempo primera ejecución: 0.0612 segundos
+
+3. Suma de array numpy con @njit (ejecuciones subsiguientes):
+482 μs ± 14.1 μs per loop (mean ± std. dev. of 2 runs, 1 loop each)
+
+4. Comparación directa numpy.sum() vs Numba:
+numpy.sum():
+466 μs ± 24.5 μs per loop (mean ± std. dev. of 2 runs, 1 loop each)
+Numba (@njit):
+368 μs ± 3.66 μs per loop (mean ± std. dev. of 2 runs, 1 loop each)
+
+Parámetro SLURM: N = 100,000,000
+
+=== EJECUCIÓN CON N = 100,000,000 ===
+
+Tiempos de ejecución (segundos):
+1. Original (for range):    3.398773
+2. Lista + sum():           0.583016
+3. NumPy + np.sum():        0.035015
+4. Numba (con compilación): 0.465921
+5. Numba (ya compilado):    0.000001
+
+Speedups vs Lista+sum():
+  NumPy: 16.7x más rápido
+  Numba: 489069.0x más rápido
+
+✓ Resultado correcto: 4,999,999,950,000,000
+
+------------------------------------------------------------
+
+================================================================================
+RESUMEN FINAL
+================================================================================
+N            Original   Lista-sum  NumPy-sum  Numba      Numba-comp
+--------------------------------------------------------------------------------
+100,000,000  3.398773   0.583016   0.035015   0.465921   0.000001  
+================================================================================
+Notebook completo creado.
+Guardar como: reduc-operation-alumno11.ipynb
+
+Ejecución completada: dom dic 14 12:53:00 CET 2025
+
